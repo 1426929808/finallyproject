@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsl.project.dao.UsersListDao">
+    <select id="getallmusic" resultType="com.hsl.project.entity.UsersMusic">
+        select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover,username from usersmusic
+        where username=#{username} order by musicid
+    </select>
+    <insert id="insertmusictouserslist">
+        insert into usersmusic(musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover,username) values(#{musicid},#{musicname},#{musicstyle},
+        #{musiclanguage},#{musictime},#{musicurl},#{musiccover},#{username})
+    </insert>
+    <update id="deleteusermusic">
+        delete from usersmusic where musicid=#{musicid}
+    </update>
+
+    <select id="getSomeMusic" resultType="com.hsl.project.entity.UsersMusic">
+        select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover,username from usersmusic
+        where musicname like "%"#{musicname}"%"
+    </select>
+
+    <select id="getStyleMusic" resultType="com.hsl.project.entity.UsersMusic">
+         select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover,username from usersmusic
+        where musicstyle = #{musicstyle}
+    </select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsl.project.dao.MusicDao">
+    <select id="getAllMusic" resultType="com.hsl.project.entity.Music">
+        select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover from music order by musicid
+
+
+    </select>
+    <insert id="insertmusic">
+        insert into music(musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover) values(#{musicid},#{musicname},#{musicstyle},
+        #{musiclanguage},#{musictime},#{musicurl},#{musiccover})
+    </insert>
+    <delete id="deletemusic">
+        delete from music where musicid=#{musicid}
+    </delete>
+    <update id="updatemusic">
+        update music
+        <set>
+
+            <if test="#{musicname != null}">
+                musicname=#{musicname},
+            </if>
+            <if test="#{musicstyle != null}">
+                musicstyle=#{musicstyle},
+            </if>
+            <if test="#{musiclanguage != null}">
+                musiclanguage=#{musiclanguage},
+            </if>
+            <if test="#{musictime != null}">
+                musictime=#{musictime},
+            </if>
+            <if test="#{musicurl != null}">
+                musicurl=#{musicurl},
+            </if>
+            <if test="#{musiccover != null}">
+                musiccover=#{musiccover}
+            </if>
+        </set>
+        where musicid=#{musicid}
+    </update>
+    <select id="selectOneById" resultType="com.hsl.project.entity.Music">
+        select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover from music where musicid=#{musicid}
+    </select>
+
+    <select id="getSomeMusic" resultType="com.hsl.project.entity.Music">
+        select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover from music
+        where musicname like "%"#{musicname}"%"
+    </select>
+
+    <select id="getStyleMusic" resultType="com.hsl.project.entity.Music">
+       select musicid,musicname,musicstyle,musiclanguage,musictime,
+        musicurl,musiccover from music
+        where musicstyle = #{musicstyle}
+    </select>
+</mapper>
